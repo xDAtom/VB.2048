@@ -7,8 +7,8 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{48B7B85A-8D90-4241-A8A9-1E289A4C6B3B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>VB._2048.My.MyApplication</StartupObject>
-    <RootNamespace>VB._2048</RootNamespace>
+    <StartupObject>VB_2048.My.MyApplication</StartupObject>
+    <RootNamespace>VB_2048</RootNamespace>
     <AssemblyName>VB.2048</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>

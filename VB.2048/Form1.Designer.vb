@@ -46,6 +46,7 @@ Partial Class Form1
         Me.BestBox = New System.Windows.Forms.PictureBox
         Me.ScoreText = New System.Windows.Forms.MaskedTextBox
         Me.BestText = New System.Windows.Forms.MaskedTextBox
+        Me.KeepGoingButton = New System.Windows.Forms.PictureBox
         CType(Me.Grid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Banner, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Tile00, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,6 +68,7 @@ Partial Class Form1
         CType(Me.NewGameButton, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.ScoreBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BestBox, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.KeepGoingButton, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Grid
@@ -258,7 +260,7 @@ Partial Class Form1
         Me.NewGameButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.NewGameButton.Cursor = System.Windows.Forms.Cursors.Hand
         Me.NewGameButton.Image = CType(resources.GetObject("NewGameButton.Image"), System.Drawing.Image)
-        Me.NewGameButton.Location = New System.Drawing.Point(431, 106)
+        Me.NewGameButton.Location = New System.Drawing.Point(431, 97)
         Me.NewGameButton.Name = "NewGameButton"
         Me.NewGameButton.Size = New System.Drawing.Size(129, 40)
         Me.NewGameButton.TabIndex = 18
@@ -320,12 +322,26 @@ Partial Class Form1
         Me.BestText.Text = "0"
         Me.BestText.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
+        'KeepGoingButton
+        '
+        Me.KeepGoingButton.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.KeepGoingButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.KeepGoingButton.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.KeepGoingButton.Image = CType(resources.GetObject("KeepGoingButton.Image"), System.Drawing.Image)
+        Me.KeepGoingButton.Location = New System.Drawing.Point(431, 143)
+        Me.KeepGoingButton.Name = "KeepGoingButton"
+        Me.KeepGoingButton.Size = New System.Drawing.Size(129, 40)
+        Me.KeepGoingButton.TabIndex = 23
+        Me.KeepGoingButton.TabStop = False
+        Me.KeepGoingButton.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(239, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(587, 715)
+        Me.Controls.Add(Me.KeepGoingButton)
         Me.Controls.Add(Me.Tile00)
         Me.Controls.Add(Me.BestText)
         Me.Controls.Add(Me.ScoreText)
@@ -375,6 +391,7 @@ Partial Class Form1
         CType(Me.NewGameButton, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.ScoreBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BestBox, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.KeepGoingButton, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -402,5 +419,6 @@ Partial Class Form1
     Friend WithEvents BestBox As System.Windows.Forms.PictureBox
     Friend WithEvents ScoreText As System.Windows.Forms.MaskedTextBox
     Friend WithEvents BestText As System.Windows.Forms.MaskedTextBox
+    Friend WithEvents KeepGoingButton As System.Windows.Forms.PictureBox
 
 End Class

@@ -59,7 +59,9 @@ Partial Class Form1
         Me.PracticeNYIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ClassicToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.XTileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.SurvivalNYIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.SurvivalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.Time = New System.Windows.Forms.Label
+        Me.SurvivalTimer = New System.Windows.Forms.Timer(Me.components)
         CType(Me.Grid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Banner, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Tile00, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -400,7 +402,7 @@ Partial Class Form1
         '
         'ModesToolStripMenuItem
         '
-        Me.ModesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PracticeNYIToolStripMenuItem, Me.ClassicToolStripMenuItem, Me.XTileToolStripMenuItem, Me.SurvivalNYIToolStripMenuItem})
+        Me.ModesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PracticeNYIToolStripMenuItem, Me.ClassicToolStripMenuItem, Me.XTileToolStripMenuItem, Me.SurvivalToolStripMenuItem})
         Me.ModesToolStripMenuItem.Name = "ModesToolStripMenuItem"
         Me.ModesToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
         Me.ModesToolStripMenuItem.Text = "Modes"
@@ -408,26 +410,41 @@ Partial Class Form1
         'PracticeNYIToolStripMenuItem
         '
         Me.PracticeNYIToolStripMenuItem.Name = "PracticeNYIToolStripMenuItem"
-        Me.PracticeNYIToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.PracticeNYIToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.PracticeNYIToolStripMenuItem.Text = "Practice (NYI)"
         '
         'ClassicToolStripMenuItem
         '
         Me.ClassicToolStripMenuItem.Name = "ClassicToolStripMenuItem"
-        Me.ClassicToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ClassicToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ClassicToolStripMenuItem.Text = "Classic"
         '
         'XTileToolStripMenuItem
         '
         Me.XTileToolStripMenuItem.Name = "XTileToolStripMenuItem"
-        Me.XTileToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.XTileToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.XTileToolStripMenuItem.Text = "X-Tile"
         '
-        'SurvivalNYIToolStripMenuItem
+        'SurvivalToolStripMenuItem
         '
-        Me.SurvivalNYIToolStripMenuItem.Name = "SurvivalNYIToolStripMenuItem"
-        Me.SurvivalNYIToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
-        Me.SurvivalNYIToolStripMenuItem.Text = "Survival (NYI)"
+        Me.SurvivalToolStripMenuItem.Name = "SurvivalToolStripMenuItem"
+        Me.SurvivalToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.SurvivalToolStripMenuItem.Text = "Survival"
+        '
+        'Time
+        '
+        Me.Time.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Time.AutoSize = True
+        Me.Time.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.0!)
+        Me.Time.Location = New System.Drawing.Point(36, 177)
+        Me.Time.Name = "Time"
+        Me.Time.Size = New System.Drawing.Size(0, 25)
+        Me.Time.TabIndex = 25
+        Me.Time.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
+        'SurvivalTimer
+        '
+        Me.SurvivalTimer.Interval = 1000
         '
         'Form1
         '
@@ -435,6 +452,7 @@ Partial Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(239, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(559, 714)
+        Me.Controls.Add(Me.Time)
         Me.Controls.Add(Me.MenuButton)
         Me.Controls.Add(Me.KeepGoingButton)
         Me.Controls.Add(Me.Tile00)
@@ -528,6 +546,8 @@ Partial Class Form1
     Friend WithEvents PracticeNYIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ClassicToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents XTileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SurvivalNYIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SurvivalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents Time As System.Windows.Forms.Label
+    Friend WithEvents SurvivalTimer As System.Windows.Forms.Timer
 
 End Class

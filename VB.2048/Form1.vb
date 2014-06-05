@@ -10,6 +10,7 @@
     Dim best As Single
     Dim GameMode As String = "Classic"
     Dim winEnvironment As Boolean = False
+    Dim gameAlreadyWon As Boolean = False
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Call fillGridPos()
@@ -203,6 +204,9 @@ firsttilesgen:
                 TileState(TileX, TileY) = 2
             End If
             playing = True
+            Time.Text = ""
+            SurvivalTimer.Enabled = False
+            gameAlreadyWon = False
         End If
         If GameMode = "X-Tile" Then
             Banner.Image = New Bitmap("data/gui/banner.png")
@@ -245,6 +249,54 @@ firsttilesgenx:
             TileY = Microsoft.VisualBasic.Mid(XTile.Name.ToString(), 6, 1)
             TileState(TileX, TileY) = 1
             playing = True
+            Time.Text = ""
+            SurvivalTimer.Enabled = False
+            gameAlreadyWon = False
+        End If
+        If GameMode = "Survival" Then
+            Banner.Image = New Bitmap("data/gui/banner.png")
+            Me.BackColor = BGColor
+            Grid.BackColor = BGColor
+            Banner.BackColor = BGColor
+            ScoreBox.BackColor = BGColor
+            BestBox.BackColor = BGColor
+            NewGameButton.BackgroundImage = Nothing
+            NewGameButton.Image = New Bitmap("data/gui/newgame.png")
+            playing = False
+            KeepGoingButton.Visible = False
+            winEnvironment = False
+            bestChanged = False
+            score = 0
+            ScoreText.Text = score
+            Call clearAllTiles()
+firsttilesgensurvival:
+            Dim Tile1 As System.Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
+            Dim Tile2 As System.Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
+            If Tile1 Is Tile2 Then GoTo firsttilesgen
+            Dim Tile1Is4 As Boolean = random4()
+            Dim TileX As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 5, 1)
+            Dim TileY As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 6, 1)
+            If Tile1Is4 = True Then
+                Tile1.Image = New Bitmap("data/tiles/tile_4.png")
+                TileState(TileX, TileY) = 4
+            Else
+                Tile1.Image = New Bitmap("data/tiles/tile_2.png")
+                TileState(TileX, TileY) = 2
+            End If
+            Dim Tile2Is4 As Boolean = random4()
+            TileX = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 5, 1)
+            TileY = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 6, 1)
+            If Tile2Is4 = True Then
+                Tile2.Image = New Bitmap("data/tiles/tile_4.png")
+                TileState(TileX, TileY) = 4
+            Else
+                Tile2.Image = New Bitmap("data/tiles/tile_2.png")
+                TileState(TileX, TileY) = 2
+            End If
+            playing = True
+            Time.Text = 15
+            SurvivalTimer.Enabled = True
+            gameAlreadyWon = False
         End If
     End Sub
 
@@ -421,7 +473,7 @@ down:
                             Call generateNewTile()
                         End If
                 End Select
-                If gameWon() Then
+                If gameWon() And Not gameAlreadyWon Then
                     Banner.Image = New Bitmap("data/gui/youwin.png")
                     Me.BackColor = WinColor : Banner.BackColor = WinColor
                     NewGameButton.BackgroundImage = New Bitmap("data/gui/tryagain.png")
@@ -432,6 +484,7 @@ down:
                     End If
                     KeepGoingButton.Visible = True
                     winEnvironment = True
+                    gameAlreadyWon = True
                 End If
             Else
                 Banner.Image = New Bitmap("data/gui/gameover.png")
@@ -454,6 +507,9 @@ down:
                 If TileState(x, y) = TileState(x + 1, y) And TileState(x, y) <> 0 Then
                     TileState(x, y) = TileState(x, y) + TileState(x + 1, y)
                     scoreAddition = scoreAddition + TileState(x, y)
+                    If TileState(x, y) >= 8 And TileState(x, y) <= 64 And GameMode = "Survival" Then
+                        Time.Text = Time.Text + 0.5
+                    End If
                     TileState(x + 1, y) = 0
                     Dim mergeTileXY As System.Object = generateTileObject(x, y)
                     Dim mergeTileXplus1Y As System.Object = generateTileObject(x + 1, y)
@@ -506,6 +562,9 @@ check:
                 If TileState(x, y) = TileState(x - 1, y) And TileState(x, y) <> 0 Then
                     TileState(x, y) = TileState(x, y) + TileState(x - 1, y)
                     scoreAddition = scoreAddition + TileState(x, y)
+                    If TileState(x, y) >= 8 And TileState(x, y) <= 64 And GameMode = "Survival" Then
+                        Time.Text = Time.Text + 0.5
+                    End If
                     TileState(x - 1, y) = 0
                     Dim mergeTileXY As System.Object = generateTileObject(x, y)
                     Dim mergeTileXminus1Y As System.Object = generateTileObject(x - 1, y)
@@ -558,6 +617,9 @@ check:
                 If TileState(x, y) = TileState(x, y + 1) And TileState(x, y) <> 0 Then
                     TileState(x, y) = TileState(x, y) + TileState(x, y + 1)
                     scoreAddition = scoreAddition + TileState(x, y)
+                    If TileState(x, y) >= 8 And TileState(x, y) <= 64 And GameMode = "Survival" Then
+                        Time.Text = Time.Text + 0.5
+                    End If
                     TileState(x, y + 1) = 0
                     Dim mergeTileXY As System.Object = generateTileObject(x, y)
                     Dim mergeTileXYplus1 As System.Object = generateTileObject(x, y + 1)
@@ -610,6 +672,9 @@ check:
                 If TileState(x, y) = TileState(x, y - 1) And TileState(x, y) <> 0 Then
                     TileState(x, y) = TileState(x, y) + TileState(x, y - 1)
                     scoreAddition = scoreAddition + TileState(x, y)
+                    If TileState(x, y) >= 8 And TileState(x, y) <= 64 And GameMode = "Survival" Then
+                        Time.Text = Time.Text + 0.5
+                    End If
                     TileState(x, y - 1) = 0
                     Dim mergeTileXY As System.Object = generateTileObject(x, y)
                     Dim mergeTileXYminus1 As System.Object = generateTileObject(x, y - 1)
@@ -748,75 +813,13 @@ check:
     End Sub
 
     Private Function gameWon()
-        If TileState(0, 0) = 2048 Then
-            Return True
-        End If
-
-        If TileState(0, 1) = 2048 Then
-            Return True
-        End If
-
-        If TileState(0, 2) = 2048 Then
-            Return True
-        End If
-
-        If TileState(0, 3) = 2048 Then
-            Return True
-        End If
-
-
-        If TileState(1, 0) = 2048 Then
-            Return True
-        End If
-
-        If TileState(1, 1) = 2048 Then
-            Return True
-        End If
-
-        If TileState(1, 2) = 2048 Then
-            Return True
-        End If
-
-        If TileState(1, 3) = 2048 Then
-            Return True
-        End If
-
-
-        If TileState(2, 0) = 2048 Then
-            Return True
-        End If
-
-        If TileState(2, 1) = 2048 Then
-            Return True
-        End If
-
-        If TileState(2, 2) = 2048 Then
-            Return True
-        End If
-
-        If TileState(2, 3) = 2048 Then
-            Return True
-        End If
-
-
-        If TileState(3, 0) = 2048 Then
-            Return True
-        End If
-
-        If TileState(3, 1) = 2048 Then
-            Return True
-        End If
-
-        If TileState(3, 2) = 2048 Then
-            Return True
-        End If
-
-        If TileState(3, 3) = 2048 Then
-            Return True
-        End If
-
-
-
+        For x = 0 To 3
+            For y = 0 To 3
+                If TileState(x, y) = 2048 Then
+                    Return True
+                End If
+            Next y
+        Next x
         Return False
     End Function
 
@@ -835,7 +838,7 @@ check:
     End Sub
 
     Private Sub MenuButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuButton.Click
-        ContextMenu.Show(Me, MenuButton.Location.X + 12, MenuButton.Location.Y + 9)
+        ContextMenu.Show(Me, MenuButton.Location.X + (MenuButton.Width / 2), MenuButton.Location.Y + (MenuButton.Height / 2))
     End Sub
 
     Private Sub DayToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DayToolStripMenuItem.Click
@@ -882,5 +885,34 @@ check:
         End If
         GameMode = "Classic"
         NewGame_Click(Nothing, EventArgs.Empty)
+    End Sub
+
+    Private Sub SurvivalToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SurvivalToolStripMenuItem.Click
+        If playing Then
+            If MsgBox("If you change mode, your current game will be discarded." & vbCrLf & "Are you sure you want to continue?", MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.No Then
+                Exit Sub
+            End If
+        End If
+        GameMode = "Survival"
+        NewGame_Click(Nothing, EventArgs.Empty)
+    End Sub
+
+    Private Sub SurvivalTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SurvivalTimer.Tick
+        If GameMode = "Survival" Then
+            Time.Text = Time.Text - 1
+        Else
+            SurvivalTimer.Enabled = False
+        End If
+        If Time.Text <= 0 Then
+            Time.Text = 0
+            Banner.Image = New Bitmap("data/gui/gameover.png")
+            NewGameButton.BackgroundImage = New Bitmap("data/gui/tryagain.png")
+            NewGameButton.Image = Nothing
+            playing = False
+            If bestChanged Then
+                saveBestScore()
+            End If
+            SurvivalTimer.Enabled = False
+        End If
     End Sub
 End Class

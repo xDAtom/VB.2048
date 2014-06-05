@@ -8,6 +8,8 @@
     Dim bestChanged As Boolean = False
     Dim score As Integer
     Dim best As Single
+    Dim GameMode As String = "Classic"
+    Dim winEnvironment As Boolean = False
 
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Call fillGridPos()
@@ -21,6 +23,7 @@
         ScoreBox.BackColor = BGColor
         BestBox.Image = New Bitmap("data/gui/best.png")
         BestBox.BackColor = BGColor
+        MenuButton.Image = New Bitmap("data/gui/menu.png")
         Call clearAllTiles()
         Call loadBestScore()
         Randomize()
@@ -105,7 +108,7 @@ CreateNewScore:
         For x = 0 To 3
             For y = 0 To 3
                 Dim TileToClear As Object = generateTileObject(x, y)
-                TileToClear.Image = New Bitmap("data/tiles/tile_0")
+                TileToClear.Image = New Bitmap("data/tiles/tile_0.png")
                 TileState(x, y) = 0
             Next y
         Next x
@@ -152,48 +155,97 @@ CreateNewScore:
     End Function
 
     Private Sub NewGame_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewGameButton.Click
-        If playing = True Then
+        If playing = True And sender IsNot Nothing Then
             If MsgBox("Are you sure you want to start a new game? You will lose the current game.", MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.Yes Then
                 playing = False
             Else
                 Exit Sub
             End If
         End If
-        Banner.Image = New Bitmap("data/gui/banner.png")
-        Me.BackColor = BGColor : Banner.BackColor = BGColor
-        NewGameButton.BackgroundImage = Nothing
-        NewGameButton.Image = New Bitmap("data/gui/newgame.png")
-        playing = False
-        KeepGoingButton.Visible = False
-        bestChanged = False
-        score = 0
-        ScoreText.Text = score
-        Call clearAllTiles()
+        If GameMode = "Classic" Then
+            Banner.Image = New Bitmap("data/gui/banner.png")
+            Me.BackColor = BGColor
+            Grid.BackColor = BGColor
+            Banner.BackColor = BGColor
+            ScoreBox.BackColor = BGColor
+            BestBox.BackColor = BGColor
+            NewGameButton.BackgroundImage = Nothing
+            NewGameButton.Image = New Bitmap("data/gui/newgame.png")
+            playing = False
+            KeepGoingButton.Visible = False
+            winEnvironment = False
+            bestChanged = False
+            score = 0
+            ScoreText.Text = score
+            Call clearAllTiles()
 firsttilesgen:
-        Dim Tile1 As System.Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
-        Dim Tile2 As System.Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
-        If Tile1 Is Tile2 Then GoTo firsttilesgen
-        Dim Tile1Is4 As Boolean = random4()
-        Dim TileX As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 5, 1)
-        Dim TileY As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 6, 1)
-        If Tile1Is4 = True Then
-            Tile1.Image = New Bitmap("data/tiles/tile_4.png")
-            TileState(TileX, TileY) = 4
-        Else
-            Tile1.Image = New Bitmap("data/tiles/tile_2.png")
-            TileState(TileX, TileY) = 2
+            Dim Tile1 As System.Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
+            Dim Tile2 As System.Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
+            If Tile1 Is Tile2 Then GoTo firsttilesgen
+            Dim Tile1Is4 As Boolean = random4()
+            Dim TileX As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 5, 1)
+            Dim TileY As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 6, 1)
+            If Tile1Is4 = True Then
+                Tile1.Image = New Bitmap("data/tiles/tile_4.png")
+                TileState(TileX, TileY) = 4
+            Else
+                Tile1.Image = New Bitmap("data/tiles/tile_2.png")
+                TileState(TileX, TileY) = 2
+            End If
+            Dim Tile2Is4 As Boolean = random4()
+            TileX = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 5, 1)
+            TileY = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 6, 1)
+            If Tile2Is4 = True Then
+                Tile2.Image = New Bitmap("data/tiles/tile_4.png")
+                TileState(TileX, TileY) = 4
+            Else
+                Tile2.Image = New Bitmap("data/tiles/tile_2.png")
+                TileState(TileX, TileY) = 2
+            End If
+            playing = True
         End If
-        Dim Tile2Is4 As Boolean = random4()
-        TileX = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 5, 1)
-        TileY = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 6, 1)
-        If Tile2Is4 = True Then
-            Tile2.Image = New Bitmap("data/tiles/tile_4.png")
-            TileState(TileX, TileY) = 4
-        Else
-            Tile2.Image = New Bitmap("data/tiles/tile_2.png")
-            TileState(TileX, TileY) = 2
+        If GameMode = "X-Tile" Then
+            Banner.Image = New Bitmap("data/gui/banner.png")
+            Me.BackColor = BGColor : Banner.BackColor = BGColor
+            NewGameButton.BackgroundImage = Nothing
+            NewGameButton.Image = New Bitmap("data/gui/newgame.png")
+            playing = False
+            KeepGoingButton.Visible = False
+            bestChanged = False
+            score = 0
+            ScoreText.Text = score
+            Call clearAllTiles()
+firsttilesgenx:
+            Dim Tile1 As System.Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
+            Dim Tile2 As System.Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
+            If Tile1 Is Tile2 Then GoTo firsttilesgenx
+            Dim Tile1Is4 As Boolean = random4()
+            Dim TileX As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 5, 1)
+            Dim TileY As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 6, 1)
+            If Tile1Is4 = True Then
+                Tile1.Image = New Bitmap("data/tiles/tile_4.png")
+                TileState(TileX, TileY) = 4
+            Else
+                Tile1.Image = New Bitmap("data/tiles/tile_2.png")
+                TileState(TileX, TileY) = 2
+            End If
+            Dim Tile2Is4 As Boolean = random4()
+            TileX = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 5, 1)
+            TileY = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 6, 1)
+            If Tile2Is4 = True Then
+                Tile2.Image = New Bitmap("data/tiles/tile_4.png")
+                TileState(TileX, TileY) = 4
+            Else
+                Tile2.Image = New Bitmap("data/tiles/tile_2.png")
+                TileState(TileX, TileY) = 2
+            End If
+            Dim XTile As Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
+            XTile.Image = New Bitmap("data/tiles/tile_1.png")
+            TileX = Microsoft.VisualBasic.Mid(XTile.Name.ToString(), 5, 1)
+            TileY = Microsoft.VisualBasic.Mid(XTile.Name.ToString(), 6, 1)
+            TileState(TileX, TileY) = 1
+            playing = True
         End If
-        playing = True
     End Sub
 
     Private Function random4()
@@ -379,6 +431,7 @@ down:
                         saveBestScore()
                     End If
                     KeepGoingButton.Visible = True
+                    winEnvironment = True
                 End If
             Else
                 Banner.Image = New Bitmap("data/gui/gameover.png")
@@ -769,10 +822,65 @@ check:
 
     Private Sub KeepGoingButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles KeepGoingButton.Click
         Banner.Image = New Bitmap("data/gui/banner.png")
-        Me.BackColor = BGColor : Banner.BackColor = BGColor
+        Me.BackColor = BGColor
+        Grid.BackColor = BGColor
+        Banner.BackColor = BGColor
+        ScoreBox.BackColor = BGColor
+        BestBox.BackColor = BGColor
         NewGameButton.BackgroundImage = Nothing
         NewGameButton.Image = New Bitmap("data/gui/newgame.png")
         KeepGoingButton.Visible = False
+        winEnvironment = False
         playing = True
+    End Sub
+
+    Private Sub MenuButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuButton.Click
+        ContextMenu.Show(Me, MenuButton.Location.X + 12, MenuButton.Location.Y + 9)
+    End Sub
+
+    Private Sub DayToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DayToolStripMenuItem.Click
+        BGColor = Color.FromArgb(250, 248, 239)
+        Call fillGridPos()
+        Call setTilesPos()
+        If Not winEnvironment Then
+            Me.BackColor = BGColor
+            Grid.BackColor = BGColor
+            Banner.BackColor = BGColor
+            ScoreBox.BackColor = BGColor
+            BestBox.BackColor = BGColor
+            MenuButton.Image = New Bitmap("data/gui/menu.png")
+        End If
+    End Sub
+
+    Private Sub NightToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NightToolStripMenuItem.Click
+        BGColor = Color.FromArgb(49, 36, 25)
+        Call fillGridPos()
+        Call setTilesPos()
+        Me.BackColor = BGColor
+        Grid.BackColor = BGColor
+        Banner.BackColor = BGColor
+        ScoreBox.BackColor = BGColor
+        BestBox.BackColor = BGColor
+        MenuButton.Image = New Bitmap("data/gui/menu_night.png")
+    End Sub
+
+    Private Sub XTileToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles XTileToolStripMenuItem.Click
+        If playing Then
+            If MsgBox("If you change mode, your current game will be discarded." & vbCrLf & "Are you sure you want to continue?", MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.No Then
+                Exit Sub
+            End If
+        End If
+        GameMode = "X-Tile"
+        NewGame_Click(Nothing, EventArgs.Empty)
+    End Sub
+
+    Private Sub ClassicToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ClassicToolStripMenuItem.Click
+        If playing Then
+            If MsgBox("If you change mode, your current game will be discarded." & vbCrLf & "Are you sure you want to continue?", MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.No Then
+                Exit Sub
+            End If
+        End If
+        GameMode = "Classic"
+        NewGame_Click(Nothing, EventArgs.Empty)
     End Sub
 End Class

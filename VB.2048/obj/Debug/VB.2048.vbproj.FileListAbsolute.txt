@@ -15,6 +15,6 @@ C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\bin\Debug
 C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\bin\Debug\VB.2048.pdb
 C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\bin\Debug\VB.2048.xml
 C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\obj\Debug\VB._2048.Form1.resources
-C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\obj\Debug\VB._2048.Resources.resources
 C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\obj\Debug\VB.2048.vbproj.GenerateResource.Cache
+C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\obj\Debug\VB_2048.Form1.resources
+C:\Users\Dominik\Documents\Visual Studio 2008\Projects\VB.2048\VB.2048\obj\Debug\VB_2048.Resources.resources

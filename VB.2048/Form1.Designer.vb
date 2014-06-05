@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.Grid = New System.Windows.Forms.PictureBox
         Me.Banner = New System.Windows.Forms.PictureBox
@@ -47,6 +48,18 @@ Partial Class Form1
         Me.ScoreText = New System.Windows.Forms.MaskedTextBox
         Me.BestText = New System.Windows.Forms.MaskedTextBox
         Me.KeepGoingButton = New System.Windows.Forms.PictureBox
+        Me.MenuButton = New System.Windows.Forms.PictureBox
+        Me.ContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.StyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.DayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.NightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.AnimationNYIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ModesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.PracticeNYIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ClassicToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.XTileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.SurvivalNYIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         CType(Me.Grid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Banner, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Tile00, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -69,6 +82,8 @@ Partial Class Form1
         CType(Me.ScoreBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BestBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KeepGoingButton, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.MenuButton, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ContextMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'Grid
@@ -76,7 +91,7 @@ Partial Class Form1
         Me.Grid.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Grid.BackColor = System.Drawing.SystemColors.Control
         Me.Grid.Image = CType(resources.GetObject("Grid.Image"), System.Drawing.Image)
-        Me.Grid.Location = New System.Drawing.Point(53, 190)
+        Me.Grid.Location = New System.Drawing.Point(39, 205)
         Me.Grid.Name = "Grid"
         Me.Grid.Size = New System.Drawing.Size(480, 480)
         Me.Grid.TabIndex = 0
@@ -87,7 +102,7 @@ Partial Class Form1
         Me.Banner.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Banner.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(239, Byte), Integer))
         Me.Banner.Image = CType(resources.GetObject("Banner.Image"), System.Drawing.Image)
-        Me.Banner.Location = New System.Drawing.Point(27, 35)
+        Me.Banner.Location = New System.Drawing.Point(13, 50)
         Me.Banner.Name = "Banner"
         Me.Banner.Size = New System.Drawing.Size(342, 111)
         Me.Banner.TabIndex = 1
@@ -97,7 +112,7 @@ Partial Class Form1
         '
         Me.Tile00.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile00.Image = CType(resources.GetObject("Tile00.Image"), System.Drawing.Image)
-        Me.Tile00.Location = New System.Drawing.Point(67, 204)
+        Me.Tile00.Location = New System.Drawing.Point(53, 219)
         Me.Tile00.Name = "Tile00"
         Me.Tile00.Size = New System.Drawing.Size(102, 102)
         Me.Tile00.TabIndex = 2
@@ -107,7 +122,7 @@ Partial Class Form1
         '
         Me.Tile10.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile10.Image = CType(resources.GetObject("Tile10.Image"), System.Drawing.Image)
-        Me.Tile10.Location = New System.Drawing.Point(184, 204)
+        Me.Tile10.Location = New System.Drawing.Point(170, 219)
         Me.Tile10.Name = "Tile10"
         Me.Tile10.Size = New System.Drawing.Size(102, 102)
         Me.Tile10.TabIndex = 3
@@ -117,7 +132,7 @@ Partial Class Form1
         '
         Me.Tile20.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile20.Image = CType(resources.GetObject("Tile20.Image"), System.Drawing.Image)
-        Me.Tile20.Location = New System.Drawing.Point(301, 204)
+        Me.Tile20.Location = New System.Drawing.Point(287, 219)
         Me.Tile20.Name = "Tile20"
         Me.Tile20.Size = New System.Drawing.Size(102, 102)
         Me.Tile20.TabIndex = 4
@@ -127,7 +142,7 @@ Partial Class Form1
         '
         Me.Tile30.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile30.Image = CType(resources.GetObject("Tile30.Image"), System.Drawing.Image)
-        Me.Tile30.Location = New System.Drawing.Point(417, 204)
+        Me.Tile30.Location = New System.Drawing.Point(403, 219)
         Me.Tile30.Name = "Tile30"
         Me.Tile30.Size = New System.Drawing.Size(102, 102)
         Me.Tile30.TabIndex = 5
@@ -137,7 +152,7 @@ Partial Class Form1
         '
         Me.Tile31.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile31.Image = CType(resources.GetObject("Tile31.Image"), System.Drawing.Image)
-        Me.Tile31.Location = New System.Drawing.Point(417, 321)
+        Me.Tile31.Location = New System.Drawing.Point(403, 336)
         Me.Tile31.Name = "Tile31"
         Me.Tile31.Size = New System.Drawing.Size(102, 102)
         Me.Tile31.TabIndex = 9
@@ -147,7 +162,7 @@ Partial Class Form1
         '
         Me.Tile21.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile21.Image = CType(resources.GetObject("Tile21.Image"), System.Drawing.Image)
-        Me.Tile21.Location = New System.Drawing.Point(301, 321)
+        Me.Tile21.Location = New System.Drawing.Point(287, 336)
         Me.Tile21.Name = "Tile21"
         Me.Tile21.Size = New System.Drawing.Size(102, 102)
         Me.Tile21.TabIndex = 8
@@ -157,7 +172,7 @@ Partial Class Form1
         '
         Me.Tile11.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile11.Image = CType(resources.GetObject("Tile11.Image"), System.Drawing.Image)
-        Me.Tile11.Location = New System.Drawing.Point(184, 321)
+        Me.Tile11.Location = New System.Drawing.Point(170, 336)
         Me.Tile11.Name = "Tile11"
         Me.Tile11.Size = New System.Drawing.Size(102, 102)
         Me.Tile11.TabIndex = 7
@@ -167,7 +182,7 @@ Partial Class Form1
         '
         Me.Tile01.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile01.Image = CType(resources.GetObject("Tile01.Image"), System.Drawing.Image)
-        Me.Tile01.Location = New System.Drawing.Point(67, 321)
+        Me.Tile01.Location = New System.Drawing.Point(53, 336)
         Me.Tile01.Name = "Tile01"
         Me.Tile01.Size = New System.Drawing.Size(102, 102)
         Me.Tile01.TabIndex = 6
@@ -177,7 +192,7 @@ Partial Class Form1
         '
         Me.Tile33.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile33.Image = CType(resources.GetObject("Tile33.Image"), System.Drawing.Image)
-        Me.Tile33.Location = New System.Drawing.Point(417, 555)
+        Me.Tile33.Location = New System.Drawing.Point(403, 570)
         Me.Tile33.Name = "Tile33"
         Me.Tile33.Size = New System.Drawing.Size(102, 102)
         Me.Tile33.TabIndex = 17
@@ -187,7 +202,7 @@ Partial Class Form1
         '
         Me.Tile23.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile23.Image = CType(resources.GetObject("Tile23.Image"), System.Drawing.Image)
-        Me.Tile23.Location = New System.Drawing.Point(301, 555)
+        Me.Tile23.Location = New System.Drawing.Point(287, 570)
         Me.Tile23.Name = "Tile23"
         Me.Tile23.Size = New System.Drawing.Size(102, 102)
         Me.Tile23.TabIndex = 16
@@ -197,7 +212,7 @@ Partial Class Form1
         '
         Me.Tile13.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile13.Image = CType(resources.GetObject("Tile13.Image"), System.Drawing.Image)
-        Me.Tile13.Location = New System.Drawing.Point(184, 555)
+        Me.Tile13.Location = New System.Drawing.Point(170, 570)
         Me.Tile13.Name = "Tile13"
         Me.Tile13.Size = New System.Drawing.Size(102, 102)
         Me.Tile13.TabIndex = 15
@@ -207,7 +222,7 @@ Partial Class Form1
         '
         Me.Tile03.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile03.Image = CType(resources.GetObject("Tile03.Image"), System.Drawing.Image)
-        Me.Tile03.Location = New System.Drawing.Point(67, 555)
+        Me.Tile03.Location = New System.Drawing.Point(53, 570)
         Me.Tile03.Name = "Tile03"
         Me.Tile03.Size = New System.Drawing.Size(102, 102)
         Me.Tile03.TabIndex = 14
@@ -218,7 +233,7 @@ Partial Class Form1
         Me.Tile32.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile32.BackColor = System.Drawing.SystemColors.Control
         Me.Tile32.Image = CType(resources.GetObject("Tile32.Image"), System.Drawing.Image)
-        Me.Tile32.Location = New System.Drawing.Point(417, 438)
+        Me.Tile32.Location = New System.Drawing.Point(403, 453)
         Me.Tile32.Name = "Tile32"
         Me.Tile32.Size = New System.Drawing.Size(102, 102)
         Me.Tile32.TabIndex = 13
@@ -228,7 +243,7 @@ Partial Class Form1
         '
         Me.Tile22.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile22.Image = CType(resources.GetObject("Tile22.Image"), System.Drawing.Image)
-        Me.Tile22.Location = New System.Drawing.Point(301, 438)
+        Me.Tile22.Location = New System.Drawing.Point(287, 453)
         Me.Tile22.Name = "Tile22"
         Me.Tile22.Size = New System.Drawing.Size(102, 102)
         Me.Tile22.TabIndex = 12
@@ -238,7 +253,7 @@ Partial Class Form1
         '
         Me.Tile12.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile12.Image = CType(resources.GetObject("Tile12.Image"), System.Drawing.Image)
-        Me.Tile12.Location = New System.Drawing.Point(184, 438)
+        Me.Tile12.Location = New System.Drawing.Point(170, 453)
         Me.Tile12.Name = "Tile12"
         Me.Tile12.Size = New System.Drawing.Size(102, 102)
         Me.Tile12.TabIndex = 11
@@ -248,7 +263,7 @@ Partial Class Form1
         '
         Me.Tile02.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.Tile02.Image = CType(resources.GetObject("Tile02.Image"), System.Drawing.Image)
-        Me.Tile02.Location = New System.Drawing.Point(67, 438)
+        Me.Tile02.Location = New System.Drawing.Point(53, 453)
         Me.Tile02.Name = "Tile02"
         Me.Tile02.Size = New System.Drawing.Size(102, 102)
         Me.Tile02.TabIndex = 10
@@ -260,7 +275,7 @@ Partial Class Form1
         Me.NewGameButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.NewGameButton.Cursor = System.Windows.Forms.Cursors.Hand
         Me.NewGameButton.Image = CType(resources.GetObject("NewGameButton.Image"), System.Drawing.Image)
-        Me.NewGameButton.Location = New System.Drawing.Point(431, 97)
+        Me.NewGameButton.Location = New System.Drawing.Point(417, 112)
         Me.NewGameButton.Name = "NewGameButton"
         Me.NewGameButton.Size = New System.Drawing.Size(129, 40)
         Me.NewGameButton.TabIndex = 18
@@ -270,7 +285,7 @@ Partial Class Form1
         '
         Me.ScoreBox.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.ScoreBox.Image = CType(resources.GetObject("ScoreBox.Image"), System.Drawing.Image)
-        Me.ScoreBox.Location = New System.Drawing.Point(326, 35)
+        Me.ScoreBox.Location = New System.Drawing.Point(312, 50)
         Me.ScoreBox.Name = "ScoreBox"
         Me.ScoreBox.Size = New System.Drawing.Size(110, 55)
         Me.ScoreBox.TabIndex = 19
@@ -280,7 +295,7 @@ Partial Class Form1
         '
         Me.BestBox.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.BestBox.Image = CType(resources.GetObject("BestBox.Image"), System.Drawing.Image)
-        Me.BestBox.Location = New System.Drawing.Point(451, 35)
+        Me.BestBox.Location = New System.Drawing.Point(437, 50)
         Me.BestBox.Name = "BestBox"
         Me.BestBox.Size = New System.Drawing.Size(109, 55)
         Me.BestBox.TabIndex = 20
@@ -294,7 +309,7 @@ Partial Class Form1
         Me.ScoreText.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.ScoreText.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold)
         Me.ScoreText.ForeColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(239, Byte), Integer))
-        Me.ScoreText.Location = New System.Drawing.Point(328, 57)
+        Me.ScoreText.Location = New System.Drawing.Point(314, 72)
         Me.ScoreText.Name = "ScoreText"
         Me.ScoreText.ReadOnly = True
         Me.ScoreText.ShortcutsEnabled = False
@@ -312,7 +327,7 @@ Partial Class Form1
         Me.BestText.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.BestText.Font = New System.Drawing.Font("Microsoft Sans Serif", 18.0!, System.Drawing.FontStyle.Bold)
         Me.BestText.ForeColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(239, Byte), Integer))
-        Me.BestText.Location = New System.Drawing.Point(453, 57)
+        Me.BestText.Location = New System.Drawing.Point(439, 72)
         Me.BestText.Name = "BestText"
         Me.BestText.ReadOnly = True
         Me.BestText.ShortcutsEnabled = False
@@ -328,19 +343,99 @@ Partial Class Form1
         Me.KeepGoingButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
         Me.KeepGoingButton.Cursor = System.Windows.Forms.Cursors.Hand
         Me.KeepGoingButton.Image = CType(resources.GetObject("KeepGoingButton.Image"), System.Drawing.Image)
-        Me.KeepGoingButton.Location = New System.Drawing.Point(431, 143)
+        Me.KeepGoingButton.Location = New System.Drawing.Point(417, 158)
         Me.KeepGoingButton.Name = "KeepGoingButton"
         Me.KeepGoingButton.Size = New System.Drawing.Size(129, 40)
         Me.KeepGoingButton.TabIndex = 23
         Me.KeepGoingButton.TabStop = False
         Me.KeepGoingButton.Visible = False
         '
+        'MenuButton
+        '
+        Me.MenuButton.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.MenuButton.Image = CType(resources.GetObject("MenuButton.Image"), System.Drawing.Image)
+        Me.MenuButton.Location = New System.Drawing.Point(522, 24)
+        Me.MenuButton.Name = "MenuButton"
+        Me.MenuButton.Size = New System.Drawing.Size(24, 19)
+        Me.MenuButton.TabIndex = 24
+        Me.MenuButton.TabStop = False
+        '
+        'ContextMenu
+        '
+        Me.ContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.ModesToolStripMenuItem})
+        Me.ContextMenu.Name = "ContextMenu"
+        Me.ContextMenu.Size = New System.Drawing.Size(117, 48)
+        '
+        'SettingsToolStripMenuItem
+        '
+        Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StyleToolStripMenuItem, Me.AnimationNYIToolStripMenuItem})
+        Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.SettingsToolStripMenuItem.Text = "Settings"
+        '
+        'StyleToolStripMenuItem
+        '
+        Me.StyleToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DayToolStripMenuItem, Me.NightToolStripMenuItem})
+        Me.StyleToolStripMenuItem.Name = "StyleToolStripMenuItem"
+        Me.StyleToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.StyleToolStripMenuItem.Text = "Style"
+        '
+        'DayToolStripMenuItem
+        '
+        Me.DayToolStripMenuItem.Name = "DayToolStripMenuItem"
+        Me.DayToolStripMenuItem.Size = New System.Drawing.Size(104, 22)
+        Me.DayToolStripMenuItem.Text = "Day"
+        '
+        'NightToolStripMenuItem
+        '
+        Me.NightToolStripMenuItem.Name = "NightToolStripMenuItem"
+        Me.NightToolStripMenuItem.Size = New System.Drawing.Size(104, 22)
+        Me.NightToolStripMenuItem.Text = "Night"
+        '
+        'AnimationNYIToolStripMenuItem
+        '
+        Me.AnimationNYIToolStripMenuItem.Name = "AnimationNYIToolStripMenuItem"
+        Me.AnimationNYIToolStripMenuItem.Size = New System.Drawing.Size(195, 22)
+        Me.AnimationNYIToolStripMenuItem.Text = "Animation Speed (NYI)"
+        '
+        'ModesToolStripMenuItem
+        '
+        Me.ModesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PracticeNYIToolStripMenuItem, Me.ClassicToolStripMenuItem, Me.XTileToolStripMenuItem, Me.SurvivalNYIToolStripMenuItem})
+        Me.ModesToolStripMenuItem.Name = "ModesToolStripMenuItem"
+        Me.ModesToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.ModesToolStripMenuItem.Text = "Modes"
+        '
+        'PracticeNYIToolStripMenuItem
+        '
+        Me.PracticeNYIToolStripMenuItem.Name = "PracticeNYIToolStripMenuItem"
+        Me.PracticeNYIToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.PracticeNYIToolStripMenuItem.Text = "Practice (NYI)"
+        '
+        'ClassicToolStripMenuItem
+        '
+        Me.ClassicToolStripMenuItem.Name = "ClassicToolStripMenuItem"
+        Me.ClassicToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.ClassicToolStripMenuItem.Text = "Classic"
+        '
+        'XTileToolStripMenuItem
+        '
+        Me.XTileToolStripMenuItem.Name = "XTileToolStripMenuItem"
+        Me.XTileToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.XTileToolStripMenuItem.Text = "X-Tile"
+        '
+        'SurvivalNYIToolStripMenuItem
+        '
+        Me.SurvivalNYIToolStripMenuItem.Name = "SurvivalNYIToolStripMenuItem"
+        Me.SurvivalNYIToolStripMenuItem.Size = New System.Drawing.Size(146, 22)
+        Me.SurvivalNYIToolStripMenuItem.Text = "Survival (NYI)"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(239, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(587, 715)
+        Me.ClientSize = New System.Drawing.Size(559, 714)
+        Me.Controls.Add(Me.MenuButton)
         Me.Controls.Add(Me.KeepGoingButton)
         Me.Controls.Add(Me.Tile00)
         Me.Controls.Add(Me.BestText)
@@ -367,7 +462,7 @@ Partial Class Form1
         Me.Controls.Add(Me.Grid)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
-        Me.MinimumSize = New System.Drawing.Size(556, 687)
+        Me.MinimumSize = New System.Drawing.Size(556, 712)
         Me.Name = "Form1"
         Me.Text = "VB.2048"
         CType(Me.Grid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -392,6 +487,8 @@ Partial Class Form1
         CType(Me.ScoreBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BestBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.KeepGoingButton, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.MenuButton, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ContextMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -420,5 +517,17 @@ Partial Class Form1
     Friend WithEvents ScoreText As System.Windows.Forms.MaskedTextBox
     Friend WithEvents BestText As System.Windows.Forms.MaskedTextBox
     Friend WithEvents KeepGoingButton As System.Windows.Forms.PictureBox
+    Friend WithEvents MenuButton As System.Windows.Forms.PictureBox
+    Friend WithEvents ContextMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents SettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents StyleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents DayToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents NightToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AnimationNYIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ModesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PracticeNYIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ClassicToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents XTileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents SurvivalNYIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

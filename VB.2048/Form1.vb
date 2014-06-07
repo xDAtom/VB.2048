@@ -2,8 +2,7 @@
     Dim BGColor As Color = Color.FromArgb(250, 248, 239)
     Dim WinColor As Color = Color.FromArgb(243, 221, 143)
     Dim GridPos(3, 3) As Point
-    Dim TileState(3, 3) As Integer
-    Dim TileSize As Size = New Size(102, 102)
+    Dim TileState(1, 3, 3) As Integer
     Dim playing As Boolean = False
     Dim bestChanged As Boolean = False
     Dim score As Integer
@@ -110,49 +109,34 @@ CreateNewScore:
             For y = 0 To 3
                 Dim TileToClear As Object = generateTileObject(x, y)
                 TileToClear.Image = New Bitmap("data/tiles/tile_0.png")
-                TileState(x, y) = 0
+                TileState(0, x, y) = 0
+                TileState(1, x, y) = 0
             Next y
         Next x
     End Sub
 
     Private Function generateTileObject(ByVal TileX, ByVal TileY)
-        If TileX = 0 And TileY = 0 Then
-            Return Tile00
-        End If
-        If TileX = 0 And TileY = 1 Then
-            Return Tile01
-        End If
-        If TileX = 0 And TileY = 2 Then
-            Return Tile02
-        End If
-        If TileX = 0 And TileY = 3 Then
-            Return Tile03
-        End If
+        If TileX = 0 And TileY = 0 Then Return Tile00
+        If TileX = 0 And TileY = 1 Then Return Tile01
+        If TileX = 0 And TileY = 2 Then Return Tile02
+        If TileX = 0 And TileY = 3 Then Return Tile03
 
         If TileX = 1 And TileY = 0 Then Return Tile10
         If TileX = 1 And TileY = 1 Then Return Tile11
         If TileX = 1 And TileY = 2 Then Return Tile12
         If TileX = 1 And TileY = 3 Then Return Tile13
 
-        If TileX = 2 And TileY = 0 Then
-            Return Tile20
-        End If
-        If TileX = 2 And TileY = 1 Then
-            Return Tile21
-        End If
-        If TileX = 2 And TileY = 2 Then
-            Return Tile22
-        End If
-        If TileX = 2 And TileY = 3 Then
-            Return Tile23
-        End If
+        If TileX = 2 And TileY = 0 Then Return Tile20
+        If TileX = 2 And TileY = 1 Then Return Tile21
+        If TileX = 2 And TileY = 2 Then Return Tile22
+        If TileX = 2 And TileY = 3 Then Return Tile23
 
         If TileX = 3 And TileY = 0 Then Return Tile30
         If TileX = 3 And TileY = 1 Then Return Tile31
         If TileX = 3 And TileY = 2 Then Return Tile32
         If TileX = 3 And TileY = 3 Then Return Tile33
 
-        Return generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
+        Return generateTileObject(TileX, TileY)
     End Function
 
     Private Sub NewGame_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles NewGameButton.Click
@@ -163,7 +147,7 @@ CreateNewScore:
                 Exit Sub
             End If
         End If
-        If GameMode = "Classic" Then
+        If GameMode = "Classic" Or GameMode = "Practice" Then
             Banner.Image = New Bitmap("data/gui/banner.png")
             Me.BackColor = BGColor
             Grid.BackColor = BGColor
@@ -188,20 +172,20 @@ firsttilesgen:
             Dim TileY As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 6, 1)
             If Tile1Is4 = True Then
                 Tile1.Image = New Bitmap("data/tiles/tile_4.png")
-                TileState(TileX, TileY) = 4
+                TileState(0, TileX, TileY) = 4
             Else
                 Tile1.Image = New Bitmap("data/tiles/tile_2.png")
-                TileState(TileX, TileY) = 2
+                TileState(0, TileX, TileY) = 2
             End If
             Dim Tile2Is4 As Boolean = random4()
             TileX = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 5, 1)
             TileY = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 6, 1)
             If Tile2Is4 = True Then
                 Tile2.Image = New Bitmap("data/tiles/tile_4.png")
-                TileState(TileX, TileY) = 4
+                TileState(0, TileX, TileY) = 4
             Else
                 Tile2.Image = New Bitmap("data/tiles/tile_2.png")
-                TileState(TileX, TileY) = 2
+                TileState(0, TileX, TileY) = 2
             End If
             playing = True
             Time.Text = ""
@@ -228,26 +212,26 @@ firsttilesgenx:
             Dim TileY As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 6, 1)
             If Tile1Is4 = True Then
                 Tile1.Image = New Bitmap("data/tiles/tile_4.png")
-                TileState(TileX, TileY) = 4
+                TileState(0, TileX, TileY) = 4
             Else
                 Tile1.Image = New Bitmap("data/tiles/tile_2.png")
-                TileState(TileX, TileY) = 2
+                TileState(0, TileX, TileY) = 2
             End If
             Dim Tile2Is4 As Boolean = random4()
             TileX = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 5, 1)
             TileY = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 6, 1)
             If Tile2Is4 = True Then
                 Tile2.Image = New Bitmap("data/tiles/tile_4.png")
-                TileState(TileX, TileY) = 4
+                TileState(0, TileX, TileY) = 4
             Else
                 Tile2.Image = New Bitmap("data/tiles/tile_2.png")
-                TileState(TileX, TileY) = 2
+                TileState(0, TileX, TileY) = 2
             End If
             Dim XTile As Object = generateTileObject(CInt(Rnd() * 3), CInt(Rnd() * 3))
             XTile.Image = New Bitmap("data/tiles/tile_1.png")
             TileX = Microsoft.VisualBasic.Mid(XTile.Name.ToString(), 5, 1)
             TileY = Microsoft.VisualBasic.Mid(XTile.Name.ToString(), 6, 1)
-            TileState(TileX, TileY) = 1
+            TileState(0, TileX, TileY) = 1
             playing = True
             Time.Text = ""
             SurvivalTimer.Enabled = False
@@ -278,25 +262,28 @@ firsttilesgensurvival:
             Dim TileY As Single = Microsoft.VisualBasic.Mid(Tile1.Name.ToString(), 6, 1)
             If Tile1Is4 = True Then
                 Tile1.Image = New Bitmap("data/tiles/tile_4.png")
-                TileState(TileX, TileY) = 4
+                TileState(0, TileX, TileY) = 4
             Else
                 Tile1.Image = New Bitmap("data/tiles/tile_2.png")
-                TileState(TileX, TileY) = 2
+                TileState(0, TileX, TileY) = 2
             End If
             Dim Tile2Is4 As Boolean = random4()
             TileX = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 5, 1)
             TileY = Microsoft.VisualBasic.Mid(Tile2.Name.ToString(), 6, 1)
             If Tile2Is4 = True Then
                 Tile2.Image = New Bitmap("data/tiles/tile_4.png")
-                TileState(TileX, TileY) = 4
+                TileState(0, TileX, TileY) = 4
             Else
                 Tile2.Image = New Bitmap("data/tiles/tile_2.png")
-                TileState(TileX, TileY) = 2
+                TileState(0, TileX, TileY) = 2
             End If
             playing = True
             Time.Text = 15
             SurvivalTimer.Enabled = True
             gameAlreadyWon = False
+        End If
+        If GameMode = "Practice" Then
+            Call saveUndo()
         End If
     End Sub
 
@@ -314,15 +301,15 @@ genstart:
         Dim TileIs4 As Boolean = random4()
         Dim TileX As Single = Microsoft.VisualBasic.Mid(Tile.Name.ToString(), 5, 1)
         Dim TileY As Single = Microsoft.VisualBasic.Mid(Tile.Name.ToString(), 6, 1)
-        If TileState(TileX, TileY) <> 0 Then
+        If TileState(0, TileX, TileY) <> 0 Then
             GoTo genstart
         End If
         If TileIs4 = True Then
             Tile.Image = New Bitmap("data/tiles/tile_4.png")
-            TileState(TileX, TileY) = 4
+            TileState(0, TileX, TileY) = 4
         Else
             Tile.Image = New Bitmap("data/tiles/tile_2.png")
-            TileState(TileX, TileY) = 2
+            TileState(0, TileX, TileY) = 2
         End If
     End Sub
 
@@ -339,13 +326,14 @@ genstart:
                 Select Case (e.KeyCode)
                     Case Keys.Left
                         Dim MoveMade As Boolean = False
+                        Call saveUndo()
 left:
                         For y = 0 To 3
                             For x = 0 To 2
-                                If TileState(x, y) = 0 Then
+                                If TileState(0, x, y) = 0 Then
                                     Dim tempbool As Boolean = False
                                     For k = x + 1 To 3
-                                        If TileState(k, y) <> 0 Then
+                                        If TileState(0, k, y) <> 0 Then
                                             tempbool = True
                                         End If
                                     Next k
@@ -353,11 +341,11 @@ left:
                                         For k = x To 3
                                             Dim Tile As Object = generateTileObject(k, y)
                                             If k < 3 Then
-                                                Tile.Image = New Bitmap("data/tiles/tile_" & TileState(k + 1, y) & ".png")
-                                                TileState(k, y) = TileState(k + 1, y)
+                                                Tile.Image = New Bitmap("data/tiles/tile_" & TileState(0, k + 1, y) & ".png")
+                                                TileState(0, k, y) = TileState(0, k + 1, y)
                                             Else
                                                 Tile.Image = New Bitmap("data/tiles/tile_0.png")
-                                                TileState(k, y) = 0
+                                                TileState(0, k, y) = 0
                                             End If
                                             MoveMade = True
                                         Next k
@@ -373,13 +361,14 @@ left:
 
                     Case Keys.Up
                         Dim MoveMade As Boolean = False
+                        Call saveUndo()
 up:
                         For x = 0 To 3
                             For y = 0 To 2
-                                If TileState(x, y) = 0 Then
+                                If TileState(0, x, y) = 0 Then
                                     Dim tempbool As Boolean = False
                                     For k = y + 1 To 3
-                                        If TileState(x, k) <> 0 Then
+                                        If TileState(0, x, k) <> 0 Then
                                             tempbool = True
                                         End If
                                     Next k
@@ -387,11 +376,11 @@ up:
                                         For k = y To 3
                                             Dim Tile As Object = generateTileObject(x, k)
                                             If k < 3 Then
-                                                Tile.Image = New Bitmap("data/tiles/tile_" & TileState(x, k + 1) & ".png")
-                                                TileState(x, k) = TileState(x, k + 1)
+                                                Tile.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, k + 1) & ".png")
+                                                TileState(0, x, k) = TileState(0, x, k + 1)
                                             Else
                                                 Tile.Image = New Bitmap("data/tiles/tile_0.png")
-                                                TileState(x, k) = 0
+                                                TileState(0, x, k) = 0
                                             End If
                                             MoveMade = True
                                         Next k
@@ -407,13 +396,14 @@ up:
 
                     Case Keys.Right
                         Dim MoveMade As Boolean = False
+                        Call saveUndo()
 right:
                         For y = 0 To 3
                             For x = 3 To 1 Step -1
-                                If TileState(x, y) = 0 Then
+                                If TileState(0, x, y) = 0 Then
                                     Dim tempbool As Boolean = False
                                     For k = x - 1 To 0 Step -1
-                                        If TileState(k, y) <> 0 Then
+                                        If TileState(0, k, y) <> 0 Then
                                             tempbool = True
                                         End If
                                     Next k
@@ -421,11 +411,11 @@ right:
                                         For k = x To 0 Step -1
                                             Dim Tile As Object = generateTileObject(k, y)
                                             If k > 0 Then
-                                                Tile.Image = New Bitmap("data/tiles/tile_" & TileState(k - 1, y) & ".png")
-                                                TileState(k, y) = TileState(k - 1, y)
+                                                Tile.Image = New Bitmap("data/tiles/tile_" & TileState(0, k - 1, y) & ".png")
+                                                TileState(0, k, y) = TileState(0, k - 1, y)
                                             Else
                                                 Tile.Image = New Bitmap("data/tiles/tile_0.png")
-                                                TileState(k, y) = 0
+                                                TileState(0, k, y) = 0
                                             End If
                                             MoveMade = True
                                         Next k
@@ -441,13 +431,14 @@ right:
 
                     Case Keys.Down
                         Dim MoveMade As Boolean = False
+                        Call saveUndo()
 down:
                         For x = 0 To 3
                             For y = 3 To 1 Step -1
-                                If TileState(x, y) = 0 Then
+                                If TileState(0, x, y) = 0 Then
                                     Dim tempbool As Boolean = False
                                     For k = y - 1 To 0 Step -1
-                                        If TileState(x, k) <> 0 Then
+                                        If TileState(0, x, k) <> 0 Then
                                             tempbool = True
                                         End If
                                     Next k
@@ -455,11 +446,11 @@ down:
                                         For k = y To 0 Step -1
                                             Dim Tile As Object = generateTileObject(x, k)
                                             If k > 0 Then
-                                                Tile.Image = New Bitmap("data/tiles/tile_" & TileState(x, k - 1) & ".png")
-                                                TileState(x, k) = TileState(x, k - 1)
+                                                Tile.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, k - 1) & ".png")
+                                                TileState(0, x, k) = TileState(0, x, k - 1)
                                             Else
                                                 Tile.Image = New Bitmap("data/tiles/tile_0.png")
-                                                TileState(x, k) = 0
+                                                TileState(0, x, k) = 0
                                             End If
                                             MoveMade = True
                                         Next k
@@ -494,6 +485,9 @@ down:
                 If bestChanged Then
                     saveBestScore()
                 End If
+                If GameMode = "Survival" Then
+                    SurvivalTimer.Enabled = False
+                End If
             End If
         End If
     End Sub
@@ -504,16 +498,16 @@ down:
 
         For y = 0 To 3
             For x = 0 To 2
-                If TileState(x, y) = TileState(x + 1, y) And TileState(x, y) <> 0 Then
-                    TileState(x, y) = TileState(x, y) + TileState(x + 1, y)
-                    scoreAddition = scoreAddition + TileState(x, y)
-                    If TileState(x, y) >= 8 And TileState(x, y) <= 64 And GameMode = "Survival" Then
+                If TileState(0, x, y) = TileState(0, x + 1, y) And TileState(0, x, y) <> 0 Then
+                    TileState(0, x, y) = TileState(0, x, y) + TileState(0, x + 1, y)
+                    scoreAddition = scoreAddition + TileState(0, x, y)
+                    If TileState(0, x, y) >= 8 And TileState(0, x, y) <= 64 And GameMode = "Survival" Then
                         Time.Text = Time.Text + 0.5
                     End If
-                    TileState(x + 1, y) = 0
+                    TileState(0, x + 1, y) = 0
                     Dim mergeTileXY As System.Object = generateTileObject(x, y)
                     Dim mergeTileXplus1Y As System.Object = generateTileObject(x + 1, y)
-                    mergeTileXY.Image = New Bitmap("data/tiles/tile_" & TileState(x, y) & ".png")
+                    mergeTileXY.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, y) & ".png")
                     mergeTileXplus1Y.Image = New Bitmap("data/tiles/tile_0.png")
                     merged = True
                 End If
@@ -524,10 +518,10 @@ down:
 check:
             For y = 0 To 3
                 For x = 0 To 2
-                    If TileState(x, y) = 0 Then
+                    If TileState(0, x, y) = 0 Then
                         Dim tempbool As Boolean = False
                         For k = x + 1 To 3
-                            If TileState(k, y) <> 0 Then
+                            If TileState(0, k, y) <> 0 Then
                                 tempbool = True
                             End If
                         Next k
@@ -535,11 +529,11 @@ check:
                             For k = x To 3
                                 Dim Tile As Object = generateTileObject(k, y)
                                 If k < 3 Then
-                                    Tile.Image = New Bitmap("data/tiles/tile_" & TileState(k + 1, y) & ".png")
-                                    TileState(k, y) = TileState(k + 1, y)
+                                    Tile.Image = New Bitmap("data/tiles/tile_" & TileState(0, k + 1, y) & ".png")
+                                    TileState(0, k, y) = TileState(0, k + 1, y)
                                 Else
                                     Tile.Image = New Bitmap("data/tiles/tile_0.png")
-                                    TileState(k, y) = 0
+                                    TileState(0, k, y) = 0
                                 End If
                             Next k
                             GoTo check
@@ -559,16 +553,16 @@ check:
 
         For y = 0 To 3
             For x = 3 To 1 Step -1
-                If TileState(x, y) = TileState(x - 1, y) And TileState(x, y) <> 0 Then
-                    TileState(x, y) = TileState(x, y) + TileState(x - 1, y)
-                    scoreAddition = scoreAddition + TileState(x, y)
-                    If TileState(x, y) >= 8 And TileState(x, y) <= 64 And GameMode = "Survival" Then
+                If TileState(0, x, y) = TileState(0, x - 1, y) And TileState(0, x, y) <> 0 Then
+                    TileState(0, x, y) = TileState(0, x, y) + TileState(0, x - 1, y)
+                    scoreAddition = scoreAddition + TileState(0, x, y)
+                    If TileState(0, x, y) >= 8 And TileState(0, x, y) <= 64 And GameMode = "Survival" Then
                         Time.Text = Time.Text + 0.5
                     End If
-                    TileState(x - 1, y) = 0
+                    TileState(0, x - 1, y) = 0
                     Dim mergeTileXY As System.Object = generateTileObject(x, y)
                     Dim mergeTileXminus1Y As System.Object = generateTileObject(x - 1, y)
-                    mergeTileXY.Image = New Bitmap("data/tiles/tile_" & TileState(x, y) & ".png")
+                    mergeTileXY.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, y) & ".png")
                     mergeTileXminus1Y.Image = New Bitmap("data/tiles/tile_0.png")
                     merged = True
                 End If
@@ -579,10 +573,10 @@ check:
 check:
             For y = 0 To 3
                 For x = 3 To 1 Step -1
-                    If TileState(x, y) = 0 Then
+                    If TileState(0, x, y) = 0 Then
                         Dim tempbool As Boolean = False
                         For k = x - 1 To 0 Step -1
-                            If TileState(k, y) <> 0 Then
+                            If TileState(0, k, y) <> 0 Then
                                 tempbool = True
                             End If
                         Next k
@@ -590,11 +584,11 @@ check:
                             For k = x To 0 Step -1
                                 Dim Tile As Object = generateTileObject(k, y)
                                 If k > 0 Then
-                                    Tile.Image = New Bitmap("data/tiles/tile_" & TileState(k - 1, y) & ".png")
-                                    TileState(k, y) = TileState(k - 1, y)
+                                    Tile.Image = New Bitmap("data/tiles/tile_" & TileState(0, k - 1, y) & ".png")
+                                    TileState(0, k, y) = TileState(0, k - 1, y)
                                 Else
                                     Tile.Image = New Bitmap("data/tiles/tile_0.png")
-                                    TileState(k, y) = 0
+                                    TileState(0, k, y) = 0
                                 End If
                             Next k
                             GoTo check
@@ -614,16 +608,16 @@ check:
 
         For x = 0 To 3
             For y = 0 To 2
-                If TileState(x, y) = TileState(x, y + 1) And TileState(x, y) <> 0 Then
-                    TileState(x, y) = TileState(x, y) + TileState(x, y + 1)
-                    scoreAddition = scoreAddition + TileState(x, y)
-                    If TileState(x, y) >= 8 And TileState(x, y) <= 64 And GameMode = "Survival" Then
+                If TileState(0, x, y) = TileState(0, x, y + 1) And TileState(0, x, y) <> 0 Then
+                    TileState(0, x, y) = TileState(0, x, y) + TileState(0, x, y + 1)
+                    scoreAddition = scoreAddition + TileState(0, x, y)
+                    If TileState(0, x, y) >= 8 And TileState(0, x, y) <= 64 And GameMode = "Survival" Then
                         Time.Text = Time.Text + 0.5
                     End If
-                    TileState(x, y + 1) = 0
+                    TileState(0, x, y + 1) = 0
                     Dim mergeTileXY As System.Object = generateTileObject(x, y)
                     Dim mergeTileXYplus1 As System.Object = generateTileObject(x, y + 1)
-                    mergeTileXY.Image = New Bitmap("data/tiles/tile_" & TileState(x, y) & ".png")
+                    mergeTileXY.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, y) & ".png")
                     mergeTileXYplus1.Image = New Bitmap("data/tiles/tile_0.png")
                     merged = True
                 End If
@@ -634,10 +628,10 @@ check:
 check:
             For x = 0 To 3
                 For y = 0 To 2
-                    If TileState(x, y) = 0 Then
+                    If TileState(0, x, y) = 0 Then
                         Dim tempbool As Boolean = False
                         For k = y + 1 To 3
-                            If TileState(x, k) <> 0 Then
+                            If TileState(0, x, k) <> 0 Then
                                 tempbool = True
                             End If
                         Next k
@@ -645,11 +639,11 @@ check:
                             For k = y To 3
                                 Dim Tile As Object = generateTileObject(x, k)
                                 If k < 3 Then
-                                    Tile.Image = New Bitmap("data/tiles/tile_" & TileState(x, k + 1) & ".png")
-                                    TileState(x, k) = TileState(x, k + 1)
+                                    Tile.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, k + 1) & ".png")
+                                    TileState(0, x, k) = TileState(0, x, k + 1)
                                 Else
                                     Tile.Image = New Bitmap("data/tiles/tile_0.png")
-                                    TileState(x, k) = 0
+                                    TileState(0, x, k) = 0
                                 End If
                             Next k
                             GoTo check
@@ -669,16 +663,16 @@ check:
 
         For x = 0 To 3
             For y = 3 To 1 Step -1
-                If TileState(x, y) = TileState(x, y - 1) And TileState(x, y) <> 0 Then
-                    TileState(x, y) = TileState(x, y) + TileState(x, y - 1)
-                    scoreAddition = scoreAddition + TileState(x, y)
-                    If TileState(x, y) >= 8 And TileState(x, y) <= 64 And GameMode = "Survival" Then
+                If TileState(0, x, y) = TileState(0, x, y - 1) And TileState(0, x, y) <> 0 Then
+                    TileState(0, x, y) = TileState(0, x, y) + TileState(0, x, y - 1)
+                    scoreAddition = scoreAddition + TileState(0, x, y)
+                    If TileState(0, x, y) >= 8 And TileState(0, x, y) <= 64 And GameMode = "Survival" Then
                         Time.Text = Time.Text + 0.5
                     End If
-                    TileState(x, y - 1) = 0
+                    TileState(0, x, y - 1) = 0
                     Dim mergeTileXY As System.Object = generateTileObject(x, y)
                     Dim mergeTileXYminus1 As System.Object = generateTileObject(x, y - 1)
-                    mergeTileXY.Image = New Bitmap("data/tiles/tile_" & TileState(x, y) & ".png")
+                    mergeTileXY.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, y) & ".png")
                     mergeTileXYminus1.Image = New Bitmap("data/tiles/tile_0.png")
                     merged = True
                 End If
@@ -689,10 +683,10 @@ check:
 check:
             For x = 0 To 3
                 For y = 3 To 1 Step -1
-                    If TileState(x, y) = 0 Then
+                    If TileState(0, x, y) = 0 Then
                         Dim tempbool As Boolean = False
                         For k = y - 1 To 0 Step -1
-                            If TileState(x, k) <> 0 Then
+                            If TileState(0, x, k) <> 0 Then
                                 tempbool = True
                             End If
                         Next k
@@ -700,11 +694,11 @@ check:
                             For k = y To 0 Step -1
                                 Dim Tile As Object = generateTileObject(x, k)
                                 If k > 0 Then
-                                    Tile.Image = New Bitmap("data/tiles/tile_" & TileState(x, k - 1) & ".png")
-                                    TileState(x, k) = TileState(x, k - 1)
+                                    Tile.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, k - 1) & ".png")
+                                    TileState(0, x, k) = TileState(0, x, k - 1)
                                 Else
                                     Tile.Image = New Bitmap("data/tiles/tile_0.png")
-                                    TileState(x, k) = 0
+                                    TileState(0, x, k) = 0
                                 End If
                             Next k
                             GoTo check
@@ -721,9 +715,9 @@ check:
     Private Function movePossible()
         For y = 0 To 3
             For x = 0 To 2
-                If TileState(x, y) = 0 Then
+                If TileState(0, x, y) = 0 Then
                     For k = x + 1 To 3
-                        If TileState(k, y) <> 0 Then
+                        If TileState(0, k, y) <> 0 Then
                             Return True
                         End If
                     Next k
@@ -733,9 +727,9 @@ check:
 
         For x = 0 To 3
             For y = 0 To 2
-                If TileState(x, y) = 0 Then
+                If TileState(0, x, y) = 0 Then
                     For k = y + 1 To 3
-                        If TileState(x, k) <> 0 Then
+                        If TileState(0, x, k) <> 0 Then
                             Return True
                         End If
                     Next k
@@ -745,9 +739,9 @@ check:
 
         For y = 0 To 3
             For x = 3 To 1 Step -1
-                If TileState(x, y) = 0 Then
+                If TileState(0, x, y) = 0 Then
                     For k = x - 1 To 0 Step -1
-                        If TileState(k, y) <> 0 Then
+                        If TileState(0, k, y) <> 0 Then
                             Return True
                         End If
                     Next k
@@ -757,9 +751,9 @@ check:
 
         For x = 0 To 3
             For y = 3 To 1 Step -1
-                If TileState(x, y) = 0 Then
+                If TileState(0, x, y) = 0 Then
                     For k = y - 1 To 0 Step -1
-                        If TileState(x, k) <> 0 Then
+                        If TileState(0, x, k) <> 0 Then
                             Return True
                         End If
                     Next k
@@ -769,7 +763,7 @@ check:
 
         For y = 0 To 3
             For x = 0 To 2
-                If TileState(x, y) = TileState(x + 1, y) And TileState(x, y) <> 0 Then
+                If TileState(0, x, y) = TileState(0, x + 1, y) And TileState(0, x, y) <> 0 Then
                     Return True
                 End If
             Next
@@ -777,7 +771,7 @@ check:
 
         For y = 0 To 3
             For x = 3 To 1 Step -1
-                If TileState(x, y) = TileState(x - 1, y) And TileState(x, y) <> 0 Then
+                If TileState(0, x, y) = TileState(0, x - 1, y) And TileState(0, x, y) <> 0 Then
                     Return True
                 End If
             Next x
@@ -785,7 +779,7 @@ check:
 
         For x = 0 To 3
             For y = 0 To 2
-                If TileState(x, y) = TileState(x, y + 1) And TileState(x, y) <> 0 Then
+                If TileState(0, x, y) = TileState(0, x, y + 1) And TileState(0, x, y) <> 0 Then
                     Return True
                 End If
             Next y
@@ -793,7 +787,7 @@ check:
 
         For x = 0 To 3
             For y = 3 To 1 Step -1
-                If TileState(x, y) = TileState(x, y - 1) And TileState(x, y) <> 0 Then
+                If TileState(0, x, y) = TileState(0, x, y - 1) And TileState(0, x, y) <> 0 Then
                     Return True
                 End If
             Next y
@@ -815,7 +809,7 @@ check:
     Private Function gameWon()
         For x = 0 To 3
             For y = 0 To 3
-                If TileState(x, y) = 2048 Then
+                If TileState(0, x, y) = 2048 Then
                     Return True
                 End If
             Next y
@@ -838,7 +832,7 @@ check:
     End Sub
 
     Private Sub MenuButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuButton.Click
-        ContextMenu.Show(Me, MenuButton.Location.X + (MenuButton.Width / 2), MenuButton.Location.Y + (MenuButton.Height / 2))
+        Context.Show(Me, MenuButton.Location.X + (MenuButton.Width / 2), MenuButton.Location.Y + (MenuButton.Height / 2))
     End Sub
 
     Private Sub DayToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DayToolStripMenuItem.Click
@@ -874,6 +868,8 @@ check:
             End If
         End If
         GameMode = "X-Tile"
+        Undo.Visible = False
+        Time.Visible = False
         NewGame_Click(Nothing, EventArgs.Empty)
     End Sub
 
@@ -884,6 +880,8 @@ check:
             End If
         End If
         GameMode = "Classic"
+        Undo.Visible = False
+        Time.Visible = False
         NewGame_Click(Nothing, EventArgs.Empty)
     End Sub
 
@@ -894,6 +892,8 @@ check:
             End If
         End If
         GameMode = "Survival"
+        Undo.Visible = False
+        Time.Visible = True
         NewGame_Click(Nothing, EventArgs.Empty)
     End Sub
 
@@ -914,5 +914,43 @@ check:
             End If
             SurvivalTimer.Enabled = False
         End If
+    End Sub
+
+    Private Sub PracticeToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PracticeToolStripMenuItem.Click
+        If playing Then
+            If MsgBox("If you change mode, your current game will be discarded." & vbCrLf & "Are you sure you want to continue?", MsgBoxStyle.YesNo, "Warning") = MsgBoxResult.No Then
+                Exit Sub
+            End If
+        End If
+        GameMode = "Practice"
+        Undo.Visible = True
+        Time.Visible = False
+        NewGame_Click(Nothing, EventArgs.Empty)
+    End Sub
+
+    Private Sub Undo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Undo.Click
+        Call loadUndo()
+    End Sub
+
+    Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        Call loadUndo()
+    End Sub
+
+    Private Sub saveUndo()
+        For x = 0 To 3
+            For y = 0 To 3
+                TileState(1, x, y) = TileState(0, x, y)
+            Next y
+        Next x
+    End Sub
+
+    Private Sub loadUndo()
+        For x = 0 To 3
+            For y = 0 To 3
+                TileState(0, x, y) = TileState(1, x, y)
+                Dim ApplyTile As Object = generateTileObject(x, y)
+                ApplyTile.Image = New Bitmap("data/tiles/tile_" & TileState(0, x, y) & ".png")
+            Next y
+        Next x
     End Sub
 End Class

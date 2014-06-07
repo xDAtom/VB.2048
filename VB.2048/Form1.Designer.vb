@@ -49,19 +49,20 @@ Partial Class Form1
         Me.BestText = New System.Windows.Forms.MaskedTextBox
         Me.KeepGoingButton = New System.Windows.Forms.PictureBox
         Me.MenuButton = New System.Windows.Forms.PictureBox
-        Me.ContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.Context = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.SettingsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.StyleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.DayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.NightToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.AnimationNYIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ModesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.PracticeNYIToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.PracticeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ClassicToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.XTileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.SurvivalToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.Time = New System.Windows.Forms.Label
         Me.SurvivalTimer = New System.Windows.Forms.Timer(Me.components)
+        Me.Undo = New System.Windows.Forms.Label
         CType(Me.Grid, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Banner, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Tile00, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,7 +86,7 @@ Partial Class Form1
         CType(Me.BestBox, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.KeepGoingButton, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.MenuButton, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ContextMenu.SuspendLayout()
+        Me.Context.SuspendLayout()
         Me.SuspendLayout()
         '
         'Grid
@@ -362,17 +363,17 @@ Partial Class Form1
         Me.MenuButton.TabIndex = 24
         Me.MenuButton.TabStop = False
         '
-        'ContextMenu
+        'Context
         '
-        Me.ContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.ModesToolStripMenuItem})
-        Me.ContextMenu.Name = "ContextMenu"
-        Me.ContextMenu.Size = New System.Drawing.Size(117, 48)
+        Me.Context.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SettingsToolStripMenuItem, Me.ModesToolStripMenuItem})
+        Me.Context.Name = "ContextMenu"
+        Me.Context.Size = New System.Drawing.Size(153, 70)
         '
         'SettingsToolStripMenuItem
         '
         Me.SettingsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StyleToolStripMenuItem, Me.AnimationNYIToolStripMenuItem})
         Me.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem"
-        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.SettingsToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SettingsToolStripMenuItem.Text = "Settings"
         '
         'StyleToolStripMenuItem
@@ -402,16 +403,16 @@ Partial Class Form1
         '
         'ModesToolStripMenuItem
         '
-        Me.ModesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PracticeNYIToolStripMenuItem, Me.ClassicToolStripMenuItem, Me.XTileToolStripMenuItem, Me.SurvivalToolStripMenuItem})
+        Me.ModesToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PracticeToolStripMenuItem, Me.ClassicToolStripMenuItem, Me.XTileToolStripMenuItem, Me.SurvivalToolStripMenuItem})
         Me.ModesToolStripMenuItem.Name = "ModesToolStripMenuItem"
-        Me.ModesToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
+        Me.ModesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.ModesToolStripMenuItem.Text = "Modes"
         '
-        'PracticeNYIToolStripMenuItem
+        'PracticeToolStripMenuItem
         '
-        Me.PracticeNYIToolStripMenuItem.Name = "PracticeNYIToolStripMenuItem"
-        Me.PracticeNYIToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.PracticeNYIToolStripMenuItem.Text = "Practice (NYI)"
+        Me.PracticeToolStripMenuItem.Name = "PracticeToolStripMenuItem"
+        Me.PracticeToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.PracticeToolStripMenuItem.Text = "Practice"
         '
         'ClassicToolStripMenuItem
         '
@@ -446,12 +447,26 @@ Partial Class Form1
         '
         Me.SurvivalTimer.Interval = 1000
         '
+        'Undo
+        '
+        Me.Undo.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Undo.AutoSize = True
+        Me.Undo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Undo.Location = New System.Drawing.Point(36, 182)
+        Me.Undo.Name = "Undo"
+        Me.Undo.Size = New System.Drawing.Size(57, 18)
+        Me.Undo.TabIndex = 26
+        Me.Undo.Text = "UNDO"
+        Me.Undo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Undo.Visible = False
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(250, Byte), Integer), CType(CType(248, Byte), Integer), CType(CType(239, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(559, 714)
+        Me.Controls.Add(Me.Undo)
         Me.Controls.Add(Me.Time)
         Me.Controls.Add(Me.MenuButton)
         Me.Controls.Add(Me.KeepGoingButton)
@@ -506,7 +521,7 @@ Partial Class Form1
         CType(Me.BestBox, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.KeepGoingButton, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.MenuButton, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ContextMenu.ResumeLayout(False)
+        Me.Context.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -536,18 +551,19 @@ Partial Class Form1
     Friend WithEvents BestText As System.Windows.Forms.MaskedTextBox
     Friend WithEvents KeepGoingButton As System.Windows.Forms.PictureBox
     Friend WithEvents MenuButton As System.Windows.Forms.PictureBox
-    Friend WithEvents ContextMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents Context As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents SettingsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents StyleToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DayToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents NightToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AnimationNYIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ModesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PracticeNYIToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents PracticeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ClassicToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents XTileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents SurvivalToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Time As System.Windows.Forms.Label
     Friend WithEvents SurvivalTimer As System.Windows.Forms.Timer
+    Friend WithEvents Undo As System.Windows.Forms.Label
 
 End Class
